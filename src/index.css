@@ -77,6 +77,23 @@
     overflow-x: hidden;
     /* Prevent any rogue child from forcing the viewport wider. */
     max-width: 100vw;
+    width: 100vw;
+  }
+
+  /* Hard belt-and-braces: every direct section descendant respects viewport width.
+     Stops any deep child (SVG, marquee, badge row, etc.) from pushing horizontally. */
+  main > section {
+    max-width: 100vw;
+    overflow-x: clip;
+  }
+  main > section * {
+    max-width: 100%;
+  }
+  /* Exceptions: things that intentionally need to escape (decorative blobs, marquee). */
+  main > section [aria-hidden="true"],
+  main > section .animate-marquee,
+  main > section svg {
+    max-width: none;
   }
 
   /* Tabular figures for data */
