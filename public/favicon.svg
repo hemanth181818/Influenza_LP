@@ -1,11 +1,37 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" shape-rendering="geometricPrecision">
-  <!-- Stamp shadow (deep plum offset, matches site's shadow-stamp motif) -->
-  <rect x="8" y="12" width="48" height="48" fill="#2E1023"/>
+  <!--
+    Influenza brand mark.
+    Editorial magazine stamp: tangerine card + bold italic serif "I" in deep plum.
+    Geometry is hand-drawn (not font-rendered) so it survives ANY favicon size, OS, and browser.
+  -->
+
   <!-- Tangerine card -->
-  <rect x="4" y="6" width="48" height="48" fill="#FB5424" stroke="#2E1023" stroke-width="3"/>
-  <!-- Italic serif "I" — drawn as vector path so it renders identically across all browsers without needing a font -->
-  <g fill="#2E1023" stroke="#2E1023" stroke-linecap="round" stroke-linejoin="round">
-    <!-- Top serif -->
-    <path d="M 19 16 L 38 16 L 36.5 19.5 L 30.2 19.5 L 24.5 44 L 31 44 L 30 47.5 L 11.5 47.5 L 12.5 44 L 18.8 44 L 24.5 19.5 L 18 19.5 Z"/>
-  </g>
+  <rect width="64" height="64" fill="#FB5424"/>
+
+  <!-- Stamp inner rule (gives editorial print feel; clipped to visible at 16×16) -->
+  <rect x="3" y="3" width="58" height="58" fill="none" stroke="#2E1023" stroke-width="2.5"/>
+
+  <!--
+    Italic uppercase "I", carved in deep plum.
+    Built as a single path with:
+      • 22-unit top serif at y=14–19
+      • Slanted stem (forward italic, ~9° slant — bottom shifts +4 right of top)
+      • 22-unit bottom serif at y=45–50
+    Total glyph height 36 in a 64 viewBox = ~56% of mark height (newspaper-masthead proportion).
+  -->
+  <path d="
+    M 17 14
+    L 39 14
+    L 38 19
+    L 30.5 19
+    L 34.5 45
+    L 42 45
+    L 41 50
+    L 22 50
+    L 23 45
+    L 29.5 45
+    L 25.5 19
+    L 18 19
+    Z
+  " fill="#2E1023"/>
 </svg>
