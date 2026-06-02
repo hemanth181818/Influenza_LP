@@ -94,13 +94,13 @@ export default function StatsSection() {
   return (
     <section
       ref={ref}
-      className="relative py-24 sm:py-32 px-5 sm:px-6 overflow-hidden bg-paper-deep grain"
+      className="relative py-16 sm:py-32 px-5 sm:px-6 overflow-hidden bg-paper-deep grain"
     >
       <div aria-hidden="true" className="absolute inset-0 bg-ledger opacity-40" />
 
       <div className="container relative z-10 mx-auto">
         {/* Section header */}
-        <header className="max-w-3xl mb-16 sm:mb-20 reveal-on-scroll">
+        <header className="max-w-3xl mb-12 sm:mb-20 reveal-on-scroll">
           <p className="font-mono text-[11px] uppercase tracking-[0.24em] text-acid mb-4">
             05 · By the numbers
           </p>

@@ -94,13 +94,13 @@ export default function AgentsCarousel() {
   return (
     <section
       id="agents"
-      className="relative py-24 sm:py-32 overflow-hidden bg-ink grain"
+      className="relative py-16 sm:py-32 overflow-hidden bg-ink grain"
     >
       <div aria-hidden="true" className="absolute inset-0 bg-ledger opacity-30" />
 
       <div className="container px-5 sm:px-6 mx-auto">
         {/* Section header */}
-        <header className="max-w-3xl mb-16 sm:mb-20 reveal-on-scroll">
+        <header className="max-w-3xl mb-12 sm:mb-20 reveal-on-scroll">
           <p className="font-mono text-[11px] uppercase tracking-[0.24em] text-acid mb-4">
             02 · What's inside
           </p>

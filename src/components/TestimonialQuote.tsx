@@ -4,7 +4,7 @@ export default function TestimonialQuote() {
   return (
     <section
       id="signup"
-      className="relative py-24 sm:py-32 px-5 sm:px-6 overflow-hidden bg-ink grain"
+      className="relative py-16 sm:py-32 px-5 sm:px-6 overflow-hidden bg-ink grain"
     >
       <div
         aria-hidden="true"
@@ -17,7 +17,7 @@ export default function TestimonialQuote() {
 
       <div className="container relative z-10 mx-auto">
         {/* Section header */}
-        <header className="max-w-3xl mb-14 reveal-on-scroll">
+        <header className="max-w-3xl mb-10 sm:mb-14 reveal-on-scroll">
           <p className="font-mono text-[11px] uppercase tracking-[0.24em] text-acid mb-4">
             06 · Your new Monday
           </p>
@@ -126,9 +126,9 @@ export default function TestimonialQuote() {
         </div>
 
         {/* Final CTA — cleanly aligned */}
-        <div className="mt-20 sm:mt-24 reveal-on-scroll">
-          <div className="bg-paper-soft border-2 border-cream shadow-stamp p-8 sm:p-12 lg:p-14">
-            <div className="grid grid-cols-12 gap-8 items-end">
+        <div className="mt-14 sm:mt-24 reveal-on-scroll">
+          <div className="bg-paper-soft border-2 border-cream shadow-stamp p-6 sm:p-12 lg:p-14">
+            <div className="grid grid-cols-12 gap-6 lg:gap-8 items-start lg:items-end">
               <div className="col-span-12 lg:col-span-7">
                 <p className="font-mono text-[11px] uppercase tracking-[0.24em] text-acid mb-5">
                   Start free
@@ -136,8 +136,8 @@ export default function TestimonialQuote() {
                 <h3
                   className="font-display text-cream tracking-[-0.03em]"
                   style={{
-                    fontSize: "clamp(2.2rem, 5.2vw, 4.4rem)",
-                    lineHeight: 0.98,
+                    fontSize: "clamp(1.85rem, 5vw, 4.4rem)",
+                    lineHeight: 1,
                     fontWeight: 600,
                   }}
                 >

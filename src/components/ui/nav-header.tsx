@@ -72,29 +72,13 @@ export function NavHeader() {
             ))}
           </ul>
 
-          {/* Mobile: horizontal scroll */}
-          <div className="md:hidden flex-1 overflow-x-auto -mx-2 px-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-            <ul className="flex items-center gap-1 whitespace-nowrap">
-              {links.map((l) => (
-                <li key={l.href}>
-                  <a
-                    href={l.href}
-                    className="inline-flex items-baseline gap-1.5 px-3 py-2 text-xs font-medium text-cream/75 min-h-[44px]"
-                  >
-                    <span className="font-mono text-[10px] text-acid">{l.num}</span>
-                    {l.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
           {/* Sign Up — stamped tangerine button */}
           <a
             href="#signup"
-            className="shrink-0 inline-flex items-center gap-1.5 bg-acid border-2 border-cream px-4 py-2 text-xs sm:text-sm font-semibold text-cream stamp-lift shadow-stamp-sm min-h-[40px] focus-visible:outline-none"
+            className="shrink-0 inline-flex items-center gap-1.5 bg-acid border-2 border-cream px-3 sm:px-4 py-2 text-xs sm:text-sm font-semibold text-cream stamp-lift shadow-stamp-sm min-h-[40px] focus-visible:outline-none"
           >
-            Sign up now
+            <span className="hidden sm:inline">Sign up now</span>
+            <span className="sm:hidden">Start</span>
             <span aria-hidden="true" className="font-mono">→</span>
           </a>
         </div>

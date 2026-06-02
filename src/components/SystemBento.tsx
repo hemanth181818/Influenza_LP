@@ -79,13 +79,13 @@ export default function SystemBento() {
   return (
     <section
       id="system"
-      className="relative py-24 sm:py-32 px-5 sm:px-6 overflow-hidden bg-ink grain"
+      className="relative py-16 sm:py-32 px-5 sm:px-6 overflow-hidden bg-ink grain"
     >
       <div aria-hidden="true" className="absolute inset-0 bg-ledger opacity-30" />
 
       <div className="container relative z-10 mx-auto">
         {/* Section header */}
-        <header className="max-w-3xl mb-16 sm:mb-20 reveal-on-scroll">
+        <header className="max-w-3xl mb-12 sm:mb-20 reveal-on-scroll">
           <p className="font-mono text-[11px] uppercase tracking-[0.24em] text-acid mb-4">
             04 · Why Influenza
           </p>

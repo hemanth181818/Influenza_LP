@@ -50,13 +50,13 @@ export default function WorkflowExample() {
   return (
     <section
       id="example"
-      className="relative py-24 sm:py-32 px-5 sm:px-6 overflow-hidden bg-paper-deep grain"
+      className="relative py-16 sm:py-32 px-5 sm:px-6 overflow-hidden bg-paper-deep grain"
     >
       <div aria-hidden="true" className="absolute inset-0 bg-ledger opacity-40" />
 
       <div className="container relative z-10 mx-auto">
         {/* Section header */}
-        <header className="max-w-3xl mb-16 sm:mb-20 reveal-on-scroll">
+        <header className="max-w-3xl mb-12 sm:mb-20 reveal-on-scroll">
           <p className="font-mono text-[11px] uppercase tracking-[0.24em] text-acid mb-4">
             03 · Live demo
           </p>
@@ -85,7 +85,7 @@ export default function WorkflowExample() {
         </header>
 
         {/* Brief + approval queue */}
-        <div className="grid grid-cols-12 gap-8 lg:gap-10 items-start">
+        <div className="grid grid-cols-12 gap-6 sm:gap-8 lg:gap-10 items-start">
           {/* Brief card */}
           <article className="col-span-12 lg:col-span-7 bg-paper border-2 border-cream shadow-stamp reveal-on-scroll">
             <header className="flex items-center justify-between px-6 sm:px-8 py-4 border-b-2 border-cream">

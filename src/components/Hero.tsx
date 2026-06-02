@@ -53,13 +53,13 @@ export default function Hero() {
       <div aria-hidden="true" className="absolute inset-0 bg-ledger opacity-50" />
 
       {/* Dateline strip */}
-      <div className="relative z-10 pt-24 sm:pt-28">
+      <div className="relative z-10 pt-20 sm:pt-28">
         <div className="container px-5 sm:px-6 mx-auto">
           <div className="flex items-center justify-between gap-4 border-b border-cream/20 pb-3">
-            <span className="font-mono text-[10px] uppercase tracking-[0.24em] text-cream/60">
+            <span className="font-mono text-[9px] sm:text-[10px] uppercase tracking-[0.2em] sm:tracking-[0.24em] text-cream/60 truncate">
               The Creator Marketing Quarterly · Issue 01
             </span>
-            <span className="hidden sm:inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.24em] text-cream/60">
+            <span className="hidden sm:inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.24em] text-cream/60 shrink-0">
               <span className="h-1.5 w-1.5 rounded-full bg-acid animate-pulse" />
               Live · Marketplace integrated
             </span>
@@ -68,7 +68,7 @@ export default function Hero() {
       </div>
 
       {/* Main editorial grid */}
-      <div className="relative z-10 container px-5 sm:px-6 mx-auto pt-10 sm:pt-12 pb-20 sm:pb-28">
+      <div className="relative z-10 container px-5 sm:px-6 mx-auto pt-8 sm:pt-12 pb-16 sm:pb-28">
         <div className="grid grid-cols-12 gap-x-6 lg:gap-x-12 xl:gap-x-16 gap-y-10">
           {/* LEFT: Masthead headline */}
           <div className="col-span-12 lg:col-span-7">
@@ -76,7 +76,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="font-mono text-[11px] uppercase tracking-[0.3em] text-cream/70 mb-10"
+              className="font-mono text-[10px] sm:text-[11px] uppercase tracking-[0.26em] sm:tracking-[0.3em] text-cream/70 mb-6 sm:mb-10"
             >
               <span className="text-acid">★</span> The creator marketing OS
             </motion.p>
@@ -88,10 +88,10 @@ export default function Hero() {
               className="font-display text-cream"
               style={{ fontWeight: 600 }}
             >
-              <span className="block text-[clamp(3rem,8.5vw,7.5rem)] leading-[0.86] tracking-[-0.04em]">
+              <span className="block text-[clamp(2.5rem,9vw,7.5rem)] leading-[0.86] tracking-[-0.04em]">
                 Run your
               </span>
-              <span className="block text-[clamp(3rem,8.5vw,7.5rem)] leading-[0.86] tracking-[-0.04em]">
+              <span className="block text-[clamp(2.5rem,9vw,7.5rem)] leading-[0.86] tracking-[-0.04em]">
                 <span
                   className="italic"
                   style={{ fontFamily: "'Instrument Serif', serif", fontWeight: 400 }}
@@ -100,7 +100,7 @@ export default function Hero() {
                 </span>{" "}
                 program
               </span>
-              <span className="block text-[clamp(1.6rem,4vw,2.8rem)] leading-[1.1] tracking-[-0.02em] mt-8 sm:mt-10 text-cream/75">
+              <span className="block text-[clamp(1.35rem,4.2vw,2.8rem)] leading-[1.15] tracking-[-0.02em] mt-6 sm:mt-10 text-cream/75">
                 <span className="inline-block" style={{ transform: "translateY(-0.14em)" }}>
                   not your
                 </span>{" "}
@@ -146,7 +146,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.25 }}
-              className="mt-14 sm:mt-16 max-w-xl text-[17px] sm:text-[18px] leading-[1.6] text-cream/75"
+              className="mt-10 sm:mt-16 max-w-xl text-[16px] sm:text-[18px] leading-[1.6] text-cream/75"
             >
               Scout creators from one dashboard. Push the stock your warehouse
               can't move. Approve every collab from one tab. Prove your ROI,
@@ -158,18 +158,18 @@ export default function Hero() {
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.4 }}
-              className="mt-12 flex flex-col sm:flex-row items-start sm:items-center gap-4"
+              className="mt-10 sm:mt-12 flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4"
             >
               <a
                 href="#signup"
-                className="group inline-flex items-center gap-2.5 bg-acid border-2 border-cream px-7 py-4 text-[13px] sm:text-sm font-semibold uppercase tracking-[0.16em] text-cream stamp-lift shadow-stamp min-h-[56px] focus-visible:outline-none"
+                className="group inline-flex justify-center sm:justify-start items-center gap-2.5 bg-acid border-2 border-cream px-7 py-4 text-[13px] sm:text-sm font-semibold uppercase tracking-[0.16em] text-cream stamp-lift shadow-stamp min-h-[56px] focus-visible:outline-none"
               >
                 Open the workspace
                 <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </a>
               <a
                 href="#example"
-                className="inline-flex items-baseline gap-2 text-cream/85 hover:text-cream transition-colors min-h-[44px]"
+                className="inline-flex justify-center sm:justify-start items-baseline gap-2 text-cream/85 hover:text-cream transition-colors min-h-[44px]"
               >
                 <span
                   className="text-lg italic"
@@ -188,7 +188,7 @@ export default function Hero() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.35 }}
             id="workflow"
-            className="col-span-12 lg:col-span-5 lg:mt-24 xl:mt-28"
+            className="col-span-12 lg:col-span-5 mt-2 lg:mt-24 xl:mt-28"
             aria-label="In this tool"
           >
             <div className="relative bg-paper-soft border-2 border-cream p-6 sm:p-7 shadow-stamp">
@@ -247,7 +247,7 @@ export default function Hero() {
         </div>
 
         {/* Scout / Push / Measure tri-strip */}
-        <div className="mt-16 sm:mt-20 grid grid-cols-1 md:grid-cols-3 border-2 border-cream divide-y md:divide-y-0 md:divide-x-2 divide-cream bg-paper-soft">
+        <div className="mt-12 sm:mt-20 grid grid-cols-1 md:grid-cols-3 border-2 border-cream divide-y-2 md:divide-y-0 md:divide-x-2 divide-cream bg-paper-soft">
           {[
             { k: "Scout", v: "from one creator marketplace", n: "I." },
             { k: "Push", v: "the stock your warehouse can't move", n: "II." },

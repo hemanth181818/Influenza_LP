@@ -17,13 +17,13 @@ export default function ConnectionsSection() {
   return (
     <section
       id="connections"
-      className="relative py-24 sm:py-32 px-5 sm:px-6 overflow-hidden bg-paper-deep grain"
+      className="relative py-16 sm:py-32 px-5 sm:px-6 overflow-hidden bg-paper-deep grain"
     >
       <div aria-hidden="true" className="absolute inset-0 bg-ledger opacity-40" />
 
       <div className="container relative z-10 mx-auto">
         {/* Section header — consistent pattern */}
-        <header className="max-w-3xl mb-16 sm:mb-20 reveal-on-scroll">
+        <header className="max-w-3xl mb-12 sm:mb-20 reveal-on-scroll">
           <p className="font-mono text-[11px] uppercase tracking-[0.24em] text-acid mb-4">
             01 · The stack
           </p>
@@ -56,7 +56,7 @@ export default function ConnectionsSection() {
         </header>
 
         {/* Visual + supporting copy */}
-        <div className="grid grid-cols-12 gap-10 lg:gap-12 items-start">
+        <div className="grid grid-cols-12 gap-8 sm:gap-10 lg:gap-12 items-start">
           <div className="col-span-12 lg:col-span-7 reveal-on-scroll">
             <Card className="relative p-6 sm:p-10 bg-paper-soft border-2 border-cream rounded-none shadow-stamp overflow-hidden">
               <div className="flex items-center justify-between mb-5">
