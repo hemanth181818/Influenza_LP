@@ -35,20 +35,20 @@ export default function Hero() {
   return (
     <section
       id="top"
-      className="relative min-h-[100svh] overflow-hidden bg-ink grain"
+      className="relative lg:min-h-[100svh] overflow-hidden bg-ink grain"
     >
-      {/* Tangerine sun, top-right */}
+      {/* Tangerine sun, top-right — much smaller on mobile so it doesn't sit over the headline */}
       <div
         aria-hidden="true"
-        className="absolute -top-56 -right-56 sm:-top-48 sm:-right-40 w-[560px] h-[560px] rounded-full bg-acid opacity-95 lg:opacity-85"
+        className="absolute -top-32 -right-32 sm:-top-48 sm:-right-40 w-[280px] h-[280px] sm:w-[560px] sm:h-[560px] rounded-full bg-acid opacity-90 lg:opacity-85"
       />
       <div
         aria-hidden="true"
-        className="absolute -top-56 -right-56 sm:-top-48 sm:-right-40 w-[560px] h-[560px] rounded-full halftone opacity-25 mix-blend-multiply"
+        className="absolute -top-32 -right-32 sm:-top-48 sm:-right-40 w-[280px] h-[280px] sm:w-[560px] sm:h-[560px] rounded-full halftone opacity-25 mix-blend-multiply"
       />
       <div
         aria-hidden="true"
-        className="absolute -bottom-48 -left-56 w-[380px] h-[380px] rounded-full bg-coral/20 blur-2xl"
+        className="hidden sm:block absolute -bottom-48 -left-56 w-[380px] h-[380px] rounded-full bg-coral/20 blur-2xl"
       />
       <div aria-hidden="true" className="absolute inset-0 bg-ledger opacity-50" />
 
@@ -100,13 +100,13 @@ export default function Hero() {
                 </span>{" "}
                 program
               </span>
-              <span className="block text-[clamp(1.35rem,4.2vw,2.8rem)] leading-[1.15] tracking-[-0.02em] mt-6 sm:mt-10 text-cream/75">
-                <span className="inline-block" style={{ transform: "translateY(-0.14em)" }}>
+              <span className="block text-[clamp(1.35rem,4.2vw,2.8rem)] leading-[1.2] tracking-[-0.02em] mt-6 sm:mt-10 text-cream/75">
+                <span className="block sm:inline-block sm:align-baseline" style={{ transform: "translateY(-0.14em)" }}>
                   not your
                 </span>{" "}
                 <span
                   aria-live="polite"
-                  className="relative inline-block ml-2 align-baseline overflow-hidden"
+                  className="relative block sm:inline-block sm:ml-2 sm:align-baseline overflow-hidden mt-1 sm:mt-0"
                   // Nudge the rotating component so the italic serif
                   // (whose metrics differ from Fraunces) visually sits on
                   // the same baseline as "not your".
