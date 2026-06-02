@@ -8,11 +8,11 @@ export default function TestimonialQuote() {
     >
       <div
         aria-hidden="true"
-        className="absolute -bottom-72 left-1/2 -translate-x-1/2 w-[760px] h-[760px] rounded-full bg-acid"
+        className="absolute -bottom-56 sm:-bottom-72 left-1/2 -translate-x-1/2 w-[380px] h-[380px] sm:w-[760px] sm:h-[760px] rounded-full bg-acid"
       />
       <div
         aria-hidden="true"
-        className="absolute -bottom-72 left-1/2 -translate-x-1/2 w-[760px] h-[760px] rounded-full halftone opacity-25 mix-blend-multiply"
+        className="absolute -bottom-56 sm:-bottom-72 left-1/2 -translate-x-1/2 w-[380px] h-[380px] sm:w-[760px] sm:h-[760px] rounded-full halftone opacity-25 mix-blend-multiply"
       />
 
       <div className="container relative z-10 mx-auto">
