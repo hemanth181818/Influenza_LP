@@ -1,0 +1,264 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+  INFLUENZA · DESIGN TOKENS
+  ────────────────────────────────────────────────────────────────
+  Aesthetic: Creator-economy editorial magazine.
+  Light bone paper, deep aubergine ink, hot tangerine accent,
+  coral pink secondary, soft mint for "commerce / affiliate" cues.
+  Fraunces display + Bricolage Grotesque body — riso/print energy.
+  Deliberately the opposite of the operator-terminal AI cliché.
+*/
+
+@layer base {
+  :root {
+    /* Paper / surface scale */
+    --ink: 41 38% 92%;            /* main bg — bone paper  ~#F5EFE3 */
+    --ink-deep: 33 30% 84%;       /* deeper paper / band   ~#E8DCC4 */
+    --ink-soft: 38 36% 88%;       /* card surface          ~#EFE5CF */
+    --ink-line: 322 25% 28%;      /* hairline ink */
+
+    /* Hot tangerine accent — single dominant signal */
+    --acid: 14 95% 56%;           /* tangerine             ~#FB5424 */
+    --acid-dim: 350 88% 62%;      /* coral pink secondary  ~#F35075 */
+    --acid-glow: 14 100% 68%;     /* hot glow */
+
+    /* Deep aubergine ink (foreground type) */
+    --cream: 322 42% 13%;         /* deep ink              ~#2E1023 */
+    --ash: 320 12% 50%;           /* muted ink */
+
+    /* Mint — affiliate / commerce-success cue (used sparingly) */
+    --mint: 156 48% 48%;
+
+    /* shadcn semantic mapping (LIGHT by default now) */
+    --background: var(--ink);
+    --foreground: var(--cream);
+    --card: var(--ink-soft);
+    --card-foreground: var(--cream);
+    --popover: var(--ink-soft);
+    --popover-foreground: var(--cream);
+    --primary: var(--acid);
+    --primary-foreground: 41 38% 96%;
+    --secondary: 38 36% 88%;
+    --secondary-foreground: var(--cream);
+    --muted: 33 25% 86%;
+    --muted-foreground: 320 12% 38%;
+    --accent: var(--acid);
+    --accent-foreground: 41 38% 96%;
+    --destructive: 0 78% 52%;
+    --destructive-foreground: 41 38% 96%;
+    --border: 322 22% 22%;
+    --input: 322 22% 22%;
+    --ring: var(--acid);
+
+    --radius: 0.25rem;
+
+    color-scheme: light;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    @apply bg-ink text-cream font-sans;
+    font-feature-settings: "ss01", "ss02", "cv11", "cv02";
+  }
+
+  /* Tabular figures for data */
+  .tabular,
+  [data-tabular] {
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: "tnum" 1;
+  }
+
+  /* Editorial italic display — Instrument Serif for italic accents */
+  .display-italic {
+    font-family: "Instrument Serif", ui-serif, Georgia, serif;
+    font-style: italic;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+  }
+
+  /* Fraunces display chunkier weights */
+  .font-display {
+    font-feature-settings: "ss01", "ss02";
+  }
+
+  /* Section anchors offset for fixed nav */
+  section[id] {
+    scroll-margin-top: 96px;
+  }
+
+  /* Visible focus ring (a11y) — ink ring on bone paper */
+  :focus-visible {
+    outline: 2px solid hsl(var(--cream));
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  ::selection {
+    background: hsl(var(--acid));
+    color: hsl(var(--ink));
+  }
+}
+
+@layer utilities {
+  /* Eyebrow micro-label */
+  .eyebrow {
+    @apply font-mono text-[11px] sm:text-xs uppercase tracking-[0.22em] text-cream/55;
+  }
+  .eyebrow-acid {
+    @apply font-mono text-[11px] sm:text-xs uppercase tracking-[0.22em] text-acid;
+  }
+
+  /* Editorial display headlines — Fraunces */
+  .h-display {
+    @apply font-display text-display-xl text-cream;
+    font-weight: 600;
+  }
+  .h-section {
+    @apply font-display text-display-lg text-cream;
+    font-weight: 600;
+  }
+
+  /* PAPER GRAIN — riso/print noise overlay */
+  .grain::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.95' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.18  0 0 0 0 0.06  0 0 0 0 0.14  0 0 0 0.5 0'/></filter><rect width='240' height='240' filter='url(%23n)' opacity='0.6'/></svg>");
+    mix-blend-mode: multiply;
+    opacity: 0.18;
+  }
+
+  /* Dotted ledger grid */
+  .bg-ledger {
+    background-image:
+      radial-gradient(hsl(var(--cream) / 0.10) 1px, transparent 1px);
+    background-size: 22px 22px;
+    background-position: -1px -1px;
+  }
+
+  /* Tangerine half-sun atmospheric */
+  .acid-glow-soft {
+    box-shadow: 0 12px 0 -2px hsl(var(--cream)),
+                0 0 0 1.5px hsl(var(--cream));
+  }
+
+  /* Reveal-on-scroll */
+  .reveal-on-scroll {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 700ms cubic-bezier(0.16, 1, 0.3, 1),
+                transform 700ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .reveal-on-scroll.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Marquee mask */
+  .marquee-mask {
+    -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+    mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+  }
+
+  /* Bracket tag */
+  .bracket-tag::before { content: "["; @apply text-acid mr-1; }
+  .bracket-tag::after  { content: "]"; @apply text-acid ml-1; }
+
+  /* Chunky offset shadow — primary CTA */
+  .shadow-stamp {
+    box-shadow: 4px 4px 0 0 hsl(var(--cream));
+  }
+  .shadow-stamp-sm {
+    box-shadow: 3px 3px 0 0 hsl(var(--cream));
+  }
+  .shadow-stamp-ink {
+    box-shadow: 4px 4px 0 0 hsl(var(--cream));
+  }
+  /* Hover lift for stamped buttons */
+  .stamp-lift {
+    transition: transform 150ms ease-out, box-shadow 150ms ease-out;
+  }
+  .stamp-lift:hover {
+    transform: translate(-1px, -1px);
+    box-shadow: 6px 6px 0 0 hsl(var(--cream));
+  }
+  .stamp-lift:active {
+    transform: translate(2px, 2px);
+    box-shadow: 1px 1px 0 0 hsl(var(--cream));
+  }
+
+  /* Editorial rules — thick + thin double-line dividers */
+  .rule-double {
+    background-image: linear-gradient(to bottom, hsl(var(--cream)) 0 1px, transparent 1px 3px, hsl(var(--cream)) 3px 4px);
+    height: 4px;
+  }
+
+  /* Halftone dot pattern, riso style */
+  .halftone {
+    background-image: radial-gradient(hsl(var(--acid)) 1.4px, transparent 1.6px);
+    background-size: 10px 10px;
+  }
+
+  /* Tape sticker — rotated washi tape feel */
+  .tape {
+    position: relative;
+  }
+  .tape::before {
+    content: "";
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    width: 70px;
+    height: 18px;
+    transform: translateX(-50%) rotate(-3deg);
+    background: hsl(var(--acid) / 0.6);
+    box-shadow: inset 0 0 0 1px hsl(var(--cream) / 0.15);
+  }
+}
+
+/* AI Architecture (signal lines): recolored for Influenza */
+.ai-architecture {
+  offset-anchor: 10px 0px;
+  animation: animation-path;
+  animation-iteration-count: infinite;
+  animation-timing-function: cubic-bezier(0.75, -0.01, 0, 0.99);
+}
+.ai-line-1 { offset-path: path("M 10 20 h 79.5 q 5 0 5 5 v 30"); animation-duration: 5s; animation-delay: 1s; }
+.ai-line-2 { offset-path: path("M 180 10 h -69.7 q -5 0 -5 5 v 40"); animation-delay: 6s; animation-duration: 2s; }
+.ai-line-3 { offset-path: path("M 130 20 v 21.8 q 0 5 -5 5 h -25"); animation-delay: 4s; animation-duration: 6s; }
+.ai-line-4 { offset-path: path("M 170 80 v -21.8 q 0 -5 -5 -5 h -65"); animation-delay: 3s; animation-duration: 3s; }
+.ai-line-5 { offset-path: path("M 135 65 h 15 q 5 0 5 5 v 10 q 0 5 -5 5 h -39.8 q -5 0 -5 -5 v -35"); animation-delay: 9s; animation-duration: 4s; }
+.ai-line-6 { offset-path: path("M 94.8 95 v -46"); animation-delay: 3s; animation-duration: 7s; }
+.ai-line-7 { offset-path: path("M 88 88 v -15 q 0 -5 -5 -5 h -10 q -5 0 -5 -5 v -5 q 0 -5 5 -5 h 28"); animation-delay: 4s; animation-duration: 4s; }
+.ai-line-8 { offset-path: path("M 30 30 h 25 q 5 0 5 5 v 6.5 q 0 5 5 5 h 35"); animation-delay: 3s; animation-duration: 3s; }
+
+@keyframes animation-path {
+  0%   { offset-distance: 0%; }
+  100% { offset-distance: 100%; }
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .ai-architecture { display: none; }
+}
