@@ -10,7 +10,7 @@ export default function Footer() {
             <a href="#top" className="inline-flex items-baseline gap-3" aria-label="Influenza, back to top">
               <span
                 className="font-display italic text-cream leading-none"
-                style={{ fontSize: "clamp(3rem, 7vw, 6rem)", fontWeight: 500, fontFamily: "'Instrument Serif', serif" }}
+                style={{ fontSize: "clamp(2.5rem, 7vw, 6rem)", fontWeight: 500, fontFamily: "'Instrument Serif', serif" }}
               >
                 Influenza
               </span>

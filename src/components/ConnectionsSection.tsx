@@ -30,8 +30,8 @@ export default function ConnectionsSection() {
           <h2
             className="font-display text-cream"
             style={{
-              fontSize: "clamp(2.2rem, 5.2vw, 4.6rem)",
-              lineHeight: 0.98,
+              fontSize: "clamp(1.85rem, 5.2vw, 4.6rem)",
+              lineHeight: 1,
               letterSpacing: "-0.03em",
               fontWeight: 600,
             }}
@@ -58,7 +58,7 @@ export default function ConnectionsSection() {
         {/* Visual + supporting copy */}
         <div className="grid grid-cols-12 gap-8 sm:gap-10 lg:gap-12 items-start">
           <div className="col-span-12 lg:col-span-7 reveal-on-scroll">
-            <Card className="relative p-6 sm:p-10 bg-paper-soft border-2 border-cream rounded-none shadow-stamp overflow-hidden">
+            <Card className="relative p-4 sm:p-10 bg-paper-soft border-2 border-cream rounded-none shadow-stamp overflow-hidden">
               <div className="flex items-center justify-between mb-5">
                 <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-cream/65">
                   context-graph

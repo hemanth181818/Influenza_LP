@@ -63,8 +63,8 @@ export default function WorkflowExample() {
           <h2
             className="font-display text-cream"
             style={{
-              fontSize: "clamp(2.2rem, 5.2vw, 4.6rem)",
-              lineHeight: 0.98,
+              fontSize: "clamp(1.85rem, 5.2vw, 4.6rem)",
+              lineHeight: 1,
               letterSpacing: "-0.03em",
               fontWeight: 600,
             }}
@@ -88,24 +88,24 @@ export default function WorkflowExample() {
         <div className="grid grid-cols-12 gap-6 sm:gap-8 lg:gap-10 items-start">
           {/* Brief card */}
           <article className="col-span-12 lg:col-span-7 bg-paper border-2 border-cream shadow-stamp reveal-on-scroll">
-            <header className="flex items-center justify-between px-6 sm:px-8 py-4 border-b-2 border-cream">
-              <span className="font-mono text-[10.5px] uppercase tracking-[0.22em] text-cream/65">
+            <header className="flex items-center justify-between gap-3 px-4 sm:px-8 py-3 sm:py-4 border-b-2 border-cream">
+              <span className="font-mono text-[9px] sm:text-[10.5px] uppercase tracking-[0.18em] sm:tracking-[0.22em] text-cream/65 truncate">
                 Brief · session 0x42c
               </span>
-              <span className="font-mono text-[10.5px] uppercase tracking-[0.22em] text-acid">
+              <span className="font-mono text-[9px] sm:text-[10.5px] uppercase tracking-[0.18em] sm:tracking-[0.22em] text-acid shrink-0">
                 09:14 · today
               </span>
             </header>
 
-            <div className="p-6 sm:p-8">
-              <p className="font-mono text-[10.5px] uppercase tracking-[0.22em] text-cream/60 mb-3">
+            <div className="p-5 sm:p-8">
+              <p className="font-mono text-[10px] sm:text-[10.5px] uppercase tracking-[0.2em] sm:tracking-[0.22em] text-cream/60 mb-3">
                 You asked
               </p>
               <p
                 className="font-display text-cream tracking-[-0.02em]"
                 style={{
-                  fontSize: "clamp(1.4rem, 2.6vw, 2.1rem)",
-                  lineHeight: 1.15,
+                  fontSize: "clamp(1.2rem, 2.6vw, 2.1rem)",
+                  lineHeight: 1.2,
                   fontWeight: 500,
                 }}
               >
@@ -127,20 +127,20 @@ export default function WorkflowExample() {
               <p className="mt-8 font-mono text-[10.5px] uppercase tracking-[0.22em] text-cream/60 mb-3">
                 Influenza found
               </p>
-              <div className="grid grid-cols-3 border-2 border-cream divide-x-2 divide-cream">
+              <div className="grid grid-cols-1 sm:grid-cols-3 border-2 border-cream divide-y-2 sm:divide-y-0 sm:divide-x-2 divide-cream">
                 {BRIEF.diagnostic.map((d) => (
-                  <div key={d.note} className="p-4 sm:p-5 text-center">
+                  <div key={d.note} className="p-4 sm:p-5 flex sm:block items-baseline justify-between gap-4 sm:text-center">
                     <div
-                      className="font-display text-acid leading-none tabular"
+                      className="font-display text-acid leading-none tabular shrink-0"
                       data-tabular
                       style={{
-                        fontSize: "clamp(1.5rem, 3vw, 2.2rem)",
+                        fontSize: "clamp(1.4rem, 3vw, 2.2rem)",
                         fontWeight: 700,
                       }}
                     >
                       {d.v}
                     </div>
-                    <div className="mt-2 font-mono text-[10px] uppercase tracking-[0.18em] text-cream/65 leading-tight">
+                    <div className="font-mono text-[10px] uppercase tracking-[0.16em] sm:tracking-[0.18em] text-cream/65 leading-tight sm:mt-2 text-right sm:text-center">
                       {d.note}
                     </div>
                   </div>
@@ -154,20 +154,20 @@ export default function WorkflowExample() {
                 {BRIEF.matched.map((c) => (
                   <li
                     key={c.handle}
-                    className="flex items-center justify-between bg-paper-soft px-4 py-3"
+                    className="flex items-center justify-between gap-3 bg-paper-soft px-3 sm:px-4 py-3"
                   >
-                    <div className="flex items-center gap-3">
-                      <span className="grid place-items-center h-8 w-8 bg-acid border-2 border-cream font-mono text-[10px] text-cream font-bold">
+                    <div className="flex items-center gap-2.5 sm:gap-3 min-w-0">
+                      <span className="shrink-0 grid place-items-center h-7 w-7 sm:h-8 sm:w-8 bg-acid border-2 border-cream font-mono text-[9px] sm:text-[10px] text-cream font-bold">
                         {c.platform}
                       </span>
                       <span
-                        className="font-display text-cream text-lg"
+                        className="font-display text-cream text-[15px] sm:text-lg truncate"
                         style={{ fontWeight: 500 }}
                       >
                         {c.handle}
                       </span>
                     </div>
-                    <div className="flex items-center gap-5 font-mono text-[11px] text-cream/75">
+                    <div className="shrink-0 flex items-center gap-2.5 sm:gap-5 font-mono text-[10px] sm:text-[11px] text-cream/75">
                       <span className="tabular" data-tabular>{c.followers}</span>
                       <span className="tabular font-semibold text-mint" data-tabular>
                         {c.engagement}
@@ -193,14 +193,14 @@ export default function WorkflowExample() {
               </span>
             </div>
 
-            <ol className="space-y-3.5">
+            <ol className="space-y-3 sm:space-y-3.5">
               {ACTIONS.map((a) => (
                 <li key={a.title}>
-                  <article className="group bg-paper border-2 border-cream p-4 sm:p-5 shadow-stamp-sm hover:translate-x-[-2px] transition-transform flex items-start gap-4">
+                  <article className="group bg-paper border-2 border-cream p-4 sm:p-5 shadow-stamp-sm hover:translate-x-[-2px] transition-transform flex items-start gap-3 sm:gap-4">
                     <span
                       className="font-display text-acid leading-none tabular shrink-0"
                       data-tabular
-                      style={{ fontSize: "2rem", fontWeight: 700 }}
+                      style={{ fontSize: "1.6rem", fontWeight: 700 }}
                     >
                       {a.n}
                     </span>

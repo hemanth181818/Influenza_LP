@@ -24,8 +24,8 @@ export default function TestimonialQuote() {
           <h2
             className="font-display text-cream"
             style={{
-              fontSize: "clamp(2.2rem, 5.2vw, 4.6rem)",
-              lineHeight: 0.98,
+              fontSize: "clamp(1.85rem, 5.2vw, 4.6rem)",
+              lineHeight: 1,
               letterSpacing: "-0.03em",
               fontWeight: 600,
             }}
@@ -41,9 +41,9 @@ export default function TestimonialQuote() {
         </header>
 
         {/* Before / After contrast — magazine spread */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 reveal-on-scroll max-w-5xl">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5 reveal-on-scroll max-w-5xl">
           {/* BEFORE */}
-          <article className="relative bg-paper-soft border-2 border-cream p-7 sm:p-9 shadow-stamp-sm">
+          <article className="relative bg-paper-soft border-2 border-cream p-5 sm:p-9 shadow-stamp-sm">
             <p className="font-mono text-[10.5px] uppercase tracking-[0.24em] text-cream/55 mb-5">
               Before Influenza
             </p>
@@ -84,7 +84,7 @@ export default function TestimonialQuote() {
           </article>
 
           {/* AFTER */}
-          <article className="relative bg-acid border-2 border-cream p-7 sm:p-9 shadow-stamp">
+          <article className="relative bg-acid border-2 border-cream p-5 sm:p-9 shadow-stamp">
             <p className="font-mono text-[10.5px] uppercase tracking-[0.24em] text-cream/70 mb-5">
               ★ With Influenza
             </p>

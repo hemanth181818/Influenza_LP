@@ -92,8 +92,8 @@ export default function SystemBento() {
           <h2
             className="font-display text-cream"
             style={{
-              fontSize: "clamp(2.2rem, 5.2vw, 4.6rem)",
-              lineHeight: 0.98,
+              fontSize: "clamp(1.85rem, 5.2vw, 4.6rem)",
+              lineHeight: 1,
               letterSpacing: "-0.03em",
               fontWeight: 600,
             }}
