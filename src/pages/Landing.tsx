@@ -14,7 +14,7 @@ export default function Landing() {
   useRevealOnScroll();
 
   return (
-    <main className="relative min-h-[100svh] bg-ink text-cream">
+    <main className="relative min-h-[100svh] bg-ink text-cream overflow-x-hidden">
       <NavHeader />
       <Hero />
       <LogoMarquee />
