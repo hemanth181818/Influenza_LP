@@ -158,7 +158,7 @@ export default function TestimonialQuote() {
               <div className="col-span-12 lg:col-span-5 flex flex-col items-start lg:items-end gap-3">
                 <form
                   onSubmit={(e) => e.preventDefault()}
-                  className="w-full flex items-stretch border-2 border-cream bg-cream shadow-stamp h-[68px]"
+                  className="w-full flex flex-col sm:flex-row sm:items-stretch border-2 border-cream bg-cream shadow-stamp"
                 >
                   <label htmlFor="cta-email" className="sr-only">
                     Work email
@@ -169,14 +169,13 @@ export default function TestimonialQuote() {
                     required
                     autoComplete="email"
                     placeholder="you@brand.com"
-                    className="flex-1 min-w-0 bg-cream px-6 text-[16px] text-ink placeholder:text-ink/45 focus:outline-none"
+                    className="flex-1 min-w-0 bg-cream px-5 sm:px-6 py-5 sm:py-0 sm:h-[68px] text-[16px] text-ink placeholder:text-ink/45 focus:outline-none border-b-2 sm:border-b-0 border-cream/30"
                   />
                   <button
                     type="submit"
-                    className="group/btn shrink-0 inline-flex items-center gap-2 bg-acid border-l-2 border-cream px-5 sm:px-6 text-[12px] font-semibold uppercase tracking-[0.16em] text-cream hover:bg-acid/95 focus-visible:outline-none"
+                    className="group/btn inline-flex justify-center items-center gap-2 bg-acid sm:border-l-2 border-cream px-5 sm:px-6 py-4 sm:py-0 sm:h-[68px] text-[13px] font-semibold uppercase tracking-[0.18em] text-cream hover:bg-acid/95 focus-visible:outline-none"
                   >
-                    <span className="hidden sm:inline">Start free</span>
-                    <span className="sm:hidden">Start</span>
+                    Start free
                     <ArrowUpRight className="w-4 h-4 transition-transform group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5" />
                   </button>
                 </form>

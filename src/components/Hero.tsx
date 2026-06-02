@@ -37,18 +37,18 @@ export default function Hero() {
       id="top"
       className="relative lg:min-h-[100svh] overflow-hidden bg-ink grain"
     >
-      {/* Tangerine sun, top-right — much smaller on mobile so it doesn't sit over the headline */}
+      {/* Tangerine sun, top-right — tiny corner accent on mobile, full sun on desktop */}
       <div
         aria-hidden="true"
-        className="absolute -top-32 -right-32 sm:-top-48 sm:-right-40 w-[280px] h-[280px] sm:w-[560px] sm:h-[560px] rounded-full bg-acid opacity-90 lg:opacity-85"
+        className="absolute -top-24 -right-24 md:-top-48 md:-right-40 w-[220px] h-[220px] md:w-[560px] md:h-[560px] rounded-full bg-acid opacity-90 lg:opacity-85"
       />
       <div
         aria-hidden="true"
-        className="absolute -top-32 -right-32 sm:-top-48 sm:-right-40 w-[280px] h-[280px] sm:w-[560px] sm:h-[560px] rounded-full halftone opacity-25 mix-blend-multiply"
+        className="absolute -top-24 -right-24 md:-top-48 md:-right-40 w-[220px] h-[220px] md:w-[560px] md:h-[560px] rounded-full halftone opacity-25 mix-blend-multiply"
       />
       <div
         aria-hidden="true"
-        className="hidden sm:block absolute -bottom-48 -left-56 w-[380px] h-[380px] rounded-full bg-coral/20 blur-2xl"
+        className="hidden md:block absolute -bottom-48 -left-56 w-[380px] h-[380px] rounded-full bg-coral/20 blur-2xl"
       />
       <div aria-hidden="true" className="absolute inset-0 bg-ledger opacity-50" />
 
@@ -148,7 +148,7 @@ export default function Hero() {
               transition={{ duration: 0.7, delay: 0.25 }}
               className="mt-10 sm:mt-16 max-w-xl text-[16px] sm:text-[18px] leading-[1.6] text-cream/75"
             >
-              Scout creators from one dashboard. Push the stock your warehouse
+              Scout creators from one place. Push the stock your warehouse
               can't move. Approve every collab from one tab. Prove your ROI,
               down to the rupee.
             </motion.p>
