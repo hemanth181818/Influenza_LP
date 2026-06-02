@@ -129,7 +129,7 @@ export default function TestimonialQuote() {
         <div className="mt-20 sm:mt-24 reveal-on-scroll">
           <div className="bg-paper-soft border-2 border-cream shadow-stamp p-8 sm:p-12 lg:p-14">
             <div className="grid grid-cols-12 gap-8 items-end">
-              <div className="col-span-12 lg:col-span-8">
+              <div className="col-span-12 lg:col-span-7">
                 <p className="font-mono text-[11px] uppercase tracking-[0.24em] text-acid mb-5">
                   Start free
                 </p>
@@ -155,7 +155,7 @@ export default function TestimonialQuote() {
                 </p>
               </div>
 
-              <div className="col-span-12 lg:col-span-4 flex flex-col items-start lg:items-end gap-3">
+              <div className="col-span-12 lg:col-span-5 flex flex-col items-start lg:items-end gap-3">
                 <form
                   onSubmit={(e) => e.preventDefault()}
                   className="w-full flex items-stretch border-2 border-cream bg-cream shadow-stamp h-[68px]"
@@ -173,10 +173,10 @@ export default function TestimonialQuote() {
                   />
                   <button
                     type="submit"
-                    aria-label="Get started"
-                    className="group/btn shrink-0 inline-flex items-center gap-2.5 bg-acid border-l-2 border-cream px-6 sm:px-7 text-[13px] font-semibold uppercase tracking-[0.18em] text-cream hover:bg-acid/95 focus-visible:outline-none"
+                    className="group/btn shrink-0 inline-flex items-center gap-2 bg-acid border-l-2 border-cream px-5 sm:px-6 text-[12px] font-semibold uppercase tracking-[0.16em] text-cream hover:bg-acid/95 focus-visible:outline-none"
                   >
-                    Get started
+                    <span className="hidden sm:inline">Start free</span>
+                    <span className="sm:hidden">Start</span>
                     <ArrowUpRight className="w-4 h-4 transition-transform group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5" />
                   </button>
                 </form>
