@@ -1,6 +1,42 @@
-import { ArrowUpRight } from "lucide-react";
+import { useState } from "react";
+import { ArrowUpRight, Check, Loader2 } from "lucide-react";
+
+type SignupStatus = "idle" | "submitting" | "success" | "error";
 
 export default function TestimonialQuote() {
+  const [email, setEmail] = useState("");
+  const [status, setStatus] = useState<SignupStatus>("idle");
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
+
+  async function handleSignup(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    if (status === "submitting") return;
+
+    setStatus("submitting");
+    setErrorMsg(null);
+
+    try {
+      const res = await fetch("/api/signup", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ email, source: "landing-cta" }),
+      });
+      const data: { ok?: boolean; error?: string } = await res
+        .json()
+        .catch(() => ({}));
+
+      if (!res.ok || !data.ok) {
+        throw new Error(data.error || "Something went wrong. Please try again.");
+      }
+
+      setStatus("success");
+      setEmail("");
+    } catch (err) {
+      setStatus("error");
+      setErrorMsg(err instanceof Error ? err.message : "Please try again.");
+    }
+  }
+
   return (
     <section
       id="signup"
@@ -157,28 +193,69 @@ export default function TestimonialQuote() {
 
               <div className="lg:col-span-5 min-w-0 w-full flex flex-col items-stretch lg:items-end gap-3">
                 <form
-                  onSubmit={(e) => e.preventDefault()}
+                  onSubmit={handleSignup}
+                  noValidate
                   className="block w-full max-w-full overflow-hidden border-2 border-cream bg-cream sm:shadow-stamp sm:flex sm:flex-row sm:items-stretch"
+                  aria-busy={status === "submitting"}
                 >
                   <label htmlFor="cta-email" className="sr-only">
                     Work email
                   </label>
                   <input
                     id="cta-email"
+                    name="email"
                     type="email"
                     required
                     autoComplete="email"
+                    value={email}
+                    onChange={(e) => {
+                      setEmail(e.target.value);
+                      if (status === "error") setStatus("idle");
+                    }}
+                    disabled={status === "submitting" || status === "success"}
                     placeholder="you@brand.com"
-                    className="block w-full max-w-full min-w-0 flex-1 bg-cream px-4 sm:px-6 py-4 sm:py-0 sm:h-[68px] text-[16px] text-ink placeholder:text-ink/45 focus:outline-none border-b-2 sm:border-b-0 border-cream/30 box-border"
+                    className="block w-full max-w-full min-w-0 flex-1 bg-cream px-4 sm:px-6 py-4 sm:py-0 sm:h-[68px] text-[16px] text-ink placeholder:text-ink/45 focus:outline-none border-b-2 sm:border-b-0 border-cream/30 box-border disabled:opacity-70"
                   />
                   <button
                     type="submit"
-                    className="group/btn block w-full max-w-full sm:w-auto sm:flex-shrink-0 box-border bg-acid border-t-2 sm:border-t-0 sm:border-l-2 border-cream px-5 sm:px-6 py-4 sm:py-0 sm:h-[68px] text-[13px] font-semibold uppercase tracking-[0.18em] text-cream hover:bg-acid/95 focus-visible:outline-none inline-flex justify-center items-center gap-2"
+                    disabled={status === "submitting" || status === "success"}
+                    className="group/btn block w-full max-w-full sm:w-auto sm:flex-shrink-0 box-border bg-acid border-t-2 sm:border-t-0 sm:border-l-2 border-cream px-5 sm:px-6 py-4 sm:py-0 sm:h-[68px] text-[13px] font-semibold uppercase tracking-[0.18em] text-cream hover:bg-acid/95 focus-visible:outline-none inline-flex justify-center items-center gap-2 disabled:cursor-not-allowed disabled:hover:bg-acid"
                   >
-                    Start free
-                    <ArrowUpRight className="w-4 h-4 transition-transform group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5" />
+                    {status === "submitting" ? (
+                      <>
+                        Submitting
+                        <Loader2 className="w-4 h-4 animate-spin" aria-hidden="true" />
+                      </>
+                    ) : status === "success" ? (
+                      <>
+                        You're in
+                        <Check className="w-4 h-4" aria-hidden="true" />
+                      </>
+                    ) : (
+                      <>
+                        Start free
+                        <ArrowUpRight className="w-4 h-4 transition-transform group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5" />
+                      </>
+                    )}
                   </button>
                 </form>
+
+                {/* Status messages */}
+                <p
+                  className="font-mono text-[11px] uppercase tracking-[0.18em] min-h-[1.25em]"
+                  aria-live="polite"
+                >
+                  {status === "success" && (
+                    <span className="text-acid">
+                      ★ Check your inbox — we'll be in touch shortly.
+                    </span>
+                  )}
+                  {status === "error" && (
+                    <span className="text-coral">
+                      {errorMsg || "Something went wrong. Please try again."}
+                    </span>
+                  )}
+                </p>
                 <a
                   href="mailto:hello@influenza.app"
                   className="inline-flex items-baseline gap-2 px-1 py-2 text-cream/80 hover:text-cream transition-colors min-h-[44px]"
