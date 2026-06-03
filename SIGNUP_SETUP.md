@@ -1,93 +1,64 @@
 # Signup capture setup
 
-The CTA form on the landing page (`/api/signup`) writes every submission to:
+The CTA form on the landing page (`/api/signup`) writes every submitted email directly to **Airtable**.
 
-1. **Brevo** — adds the contact to a list (so you can send welcome / drip emails)
-2. **Google Sheets** — appends a row (your source-of-truth backup)
-
-Both writes run in parallel. If one fails, the other still records the signup and we still tell the user "you're in".
+If the Airtable write fails, the user sees an error and the backend logs the failure in Vercel.
 
 ---
 
-## 1. Brevo
+## 1. Airtable table
 
-1. Create a (free) account at https://app.brevo.com.
-2. Make a contact list: **Contacts → Lists → New list**. Note its **numeric ID** (visible in the URL or list table).
-3. Generate an API key: **Settings → SMTP & API → API Keys → Generate a new API key**. Copy it (starts with `xkeysib-...`).
-4. (Optional but recommended) Build a welcome email automation: **Automations → Create → Welcome a new contact → trigger on "added to list X"**.
+Create or use an Airtable table with an email field.
 
-You'll need two values:
-- `BREVO_API_KEY` = the key from step 3
-- `BREVO_LIST_ID` = the numeric ID from step 2
+Required field:
+- `Email` - email field or single line text field
+
+The backend only writes the email value, so the table does not need any other fields.
 
 ---
 
-## 2. Google Sheets webhook (via Apps Script)
+## 2. Airtable token
 
-This is the simplest way to get rows into a Sheet without OAuth.
+Create a personal access token in Airtable with permission to create records in the target base.
 
-1. Create a new Google Sheet. First row, columns: `timestamp | email | source | ip | user_agent`.
-2. **Extensions → Apps Script**. Replace the default code with:
+Required scope:
+- `data.records:write`
 
-   ```javascript
-   const SECRET = "CHANGE_ME_TO_A_LONG_RANDOM_STRING";
-
-   function doPost(e) {
-     try {
-       const body = JSON.parse(e.postData.contents);
-       if (SECRET && body.secret !== SECRET) {
-         return ContentService.createTextOutput(
-           JSON.stringify({ ok: false, error: "bad secret" })
-         ).setMimeType(ContentService.MimeType.JSON);
-       }
-       const sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
-       sheet.appendRow([
-         body.ts || new Date().toISOString(),
-         body.email || "",
-         body.source || "",
-         body.ip || "",
-         body.ua || "",
-       ]);
-       return ContentService.createTextOutput(JSON.stringify({ ok: true }))
-         .setMimeType(ContentService.MimeType.JSON);
-     } catch (err) {
-       return ContentService.createTextOutput(
-         JSON.stringify({ ok: false, error: String(err) })
-       ).setMimeType(ContentService.MimeType.JSON);
-     }
-   }
-   ```
-
-3. **Deploy → New deployment → Type: Web app**.
-   - Description: `Influenza signup webhook`
-   - Execute as: **Me**
-   - Who has access: **Anyone**
-   - Click **Deploy**, authorize, then copy the **Web app URL** (looks like `https://script.google.com/macros/s/AKfy.../exec`).
-
-You'll need two values:
-- `SHEETS_WEBHOOK_URL` = the web-app URL above
-- `SHEETS_WEBHOOK_SECRET` = the same string you put in `SECRET` (anything random; just keeps randos from spamming your sheet)
-
-> Re-deploying the Apps Script after edits gives you a **new URL** — update `SHEETS_WEBHOOK_URL` in Vercel each time. To avoid this, use **Manage deployments → edit → New version** which keeps the same URL.
+Required access:
+- The base that contains your signup table
 
 ---
 
-## 3. Vercel env vars
+## 3. Environment variables
 
-In the Vercel dashboard → your project → **Settings → Environment Variables**, add:
+Local `.env` and Vercel both need:
 
-| Name | Value | Environments |
-|------|-------|--------------|
-| `BREVO_API_KEY` | `xkeysib-...` | Production, Preview |
-| `BREVO_LIST_ID` | `5` (or whatever your list ID is) | Production, Preview |
-| `SHEETS_WEBHOOK_URL` | `https://script.google.com/macros/s/.../exec` | Production, Preview |
-| `SHEETS_WEBHOOK_SECRET` | your random string | Production, Preview |
+| Name | Value |
+|------|-------|
+| `AIRTABLE_TOKEN` | Airtable personal access token |
+| `AIRTABLE_BASE_ID` | Base ID, starts with `app` |
+| `AIRTABLE_TABLE_NAME` | Table name or table ID |
+| `AIRTABLE_EMAIL_FIELD` | Email field name, defaults to `Email` |
 
-Then **redeploy** (the function won't pick up new env vars until next build).
+Then redeploy Vercel after setting the production environment variables.
 
 ---
 
-## 4. Testing
+## 4. Airtable trigger
+
+To trigger an automation when someone enters their email:
+
+1. In Airtable, open **Automations**.
+2. Create an automation with trigger **When record created**.
+3. Select the same table used by `AIRTABLE_TABLE_NAME`.
+4. Add the action you want, such as send email, Slack alert, or webhook.
+5. Turn the automation on.
+
+Every successful signup creates one Airtable record, which fires this trigger.
+
+---
+
+## 5. Testing
 
 After redeploy, hit the endpoint directly:
 
@@ -97,8 +68,6 @@ curl -X POST https://YOUR-DOMAIN/api/signup \
   -d '{"email":"test+1@example.com"}'
 ```
 
-Expected: `{"ok":true}`, and:
-- Row appears in your Google Sheet
-- Contact appears in your Brevo list under **Contacts**
+Expected: `{"ok":true}` and a new Airtable record appears.
 
-If something's off, check **Vercel → Deployments → latest → Functions → /api/signup → Logs**.
+If something is off, check **Vercel -> Deployments -> latest -> Functions -> /api/signup -> Logs**.

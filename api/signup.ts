@@ -1,15 +1,14 @@
 /**
  * POST /api/signup
- * Body: { email: string, source?: string }
+ * Body: { email: string }
  *
- * 1. Adds the contact to a Brevo list (creates if new, no-op if already present).
- * 2. Appends a row to a Google Sheet via an Apps Script webhook.
+ * Creates an Airtable record for the submitted email.
  *
  * Env vars (set in Vercel dashboard → Settings → Environment Variables):
- *   BREVO_API_KEY          — from https://app.brevo.com/settings/keys/api
- *   BREVO_LIST_ID          — numeric ID of the list to add contacts to
- *   SHEETS_WEBHOOK_URL     — Google Apps Script web-app URL (POSTs JSON)
- *   SHEETS_WEBHOOK_SECRET  — optional shared secret to verify requests
+ *   AIRTABLE_TOKEN         — Airtable personal access token
+ *   AIRTABLE_BASE_ID       — Airtable base ID, starts with app...
+ *   AIRTABLE_TABLE_NAME    — table name or table ID
+ *   AIRTABLE_EMAIL_FIELD   — email field name, defaults to Email
  */
 
 export const config = { runtime: "edge" };
@@ -41,129 +40,68 @@ export default async function handler(req: Request): Promise<Response> {
 
   const email =
     typeof payload.email === "string" ? payload.email.trim().toLowerCase() : "";
-  const source =
-    typeof payload.source === "string" ? payload.source.slice(0, 120) : "landing-cta";
-
   if (!email || !EMAIL_RE.test(email) || email.length > 254) {
     return json({ ok: false, error: "Enter a valid email." }, 400);
   }
 
-  const BREVO_API_KEY = process.env.BREVO_API_KEY;
-  const BREVO_LIST_ID = process.env.BREVO_LIST_ID;
-  const SHEETS_WEBHOOK_URL = process.env.SHEETS_WEBHOOK_URL;
-  const SHEETS_WEBHOOK_SECRET = process.env.SHEETS_WEBHOOK_SECRET;
+  const AIRTABLE_TOKEN = process.env.AIRTABLE_TOKEN;
+  const AIRTABLE_BASE_ID = process.env.AIRTABLE_BASE_ID;
+  const AIRTABLE_TABLE_NAME = process.env.AIRTABLE_TABLE_NAME;
+  const AIRTABLE_EMAIL_FIELD = process.env.AIRTABLE_EMAIL_FIELD || "Email";
 
-  const ts = new Date().toISOString();
-  const ip =
-    req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "";
-  const ua = req.headers.get("user-agent") || "";
-
-  // Run both writes in parallel; don't let one failure kill the other.
-  const results = await Promise.allSettled([
-    pushToBrevo({ email, source, BREVO_API_KEY, BREVO_LIST_ID }),
-    pushToSheet({
+  try {
+    await pushToAirtable({
       email,
-      source,
-      ts,
-      ip,
-      ua,
-      url: SHEETS_WEBHOOK_URL,
-      secret: SHEETS_WEBHOOK_SECRET,
-    }),
-  ]);
-
-  const brevo = results[0];
-  const sheet = results[1];
-
-  // Hard-fail only if BOTH writes failed — we don't want to lose a signup.
-  if (brevo.status === "rejected" && sheet.status === "rejected") {
-    console.error("signup: both sinks failed", {
-      brevo: brevo.reason,
-      sheet: sheet.reason,
+      token: AIRTABLE_TOKEN,
+      baseId: AIRTABLE_BASE_ID,
+      tableName: AIRTABLE_TABLE_NAME,
+      emailField: AIRTABLE_EMAIL_FIELD,
     });
+  } catch (err) {
+    console.error("signup: airtable failed", err);
     return json(
       { ok: false, error: "Something went wrong. Please try again." },
       502
     );
   }
 
-  // Soft-warn if one failed — log it, still tell the user we got them.
-  if (brevo.status === "rejected") {
-    console.error("signup: brevo failed", brevo.reason);
-  }
-  if (sheet.status === "rejected") {
-    console.error("signup: sheet failed", sheet.reason);
-  }
-
   return json({ ok: true });
 }
 
-async function pushToBrevo(opts: {
+async function pushToAirtable(opts: {
   email: string;
-  source: string;
-  BREVO_API_KEY?: string;
-  BREVO_LIST_ID?: string;
+  token?: string;
+  baseId?: string;
+  tableName?: string;
+  emailField: string;
 }) {
-  if (!opts.BREVO_API_KEY || !opts.BREVO_LIST_ID) {
-    throw new Error("Brevo env vars missing");
-  }
-  const listId = Number(opts.BREVO_LIST_ID);
-  if (!Number.isFinite(listId)) {
-    throw new Error("BREVO_LIST_ID must be a number");
-  }
+  if (!opts.token) throw new Error("AIRTABLE_TOKEN missing");
+  if (!opts.baseId) throw new Error("AIRTABLE_BASE_ID missing");
+  if (!opts.tableName) throw new Error("AIRTABLE_TABLE_NAME missing");
 
-  const res = await fetch("https://api.brevo.com/v3/contacts", {
-    method: "POST",
-    headers: {
-      "api-key": opts.BREVO_API_KEY,
-      "content-type": "application/json",
-      accept: "application/json",
-    },
-    body: JSON.stringify({
-      email: opts.email,
-      listIds: [listId],
-      updateEnabled: true,
-      attributes: { SOURCE: opts.source },
-    }),
-  });
-
-  // Brevo returns 201 (created) or 204 (updated). 400 with code "duplicate_parameter"
-  // means the contact already exists — that's fine, we updateEnabled above.
-  if (res.ok) return;
-
-  const text = await res.text().catch(() => "");
-  // "Contact already exist" surfaces as 400 in some flows even with updateEnabled.
-  if (res.status === 400 && /already/i.test(text)) return;
-
-  throw new Error(`Brevo ${res.status}: ${text.slice(0, 200)}`);
-}
-
-async function pushToSheet(opts: {
-  email: string;
-  source: string;
-  ts: string;
-  ip: string;
-  ua: string;
-  url?: string;
-  secret?: string;
-}) {
-  if (!opts.url) throw new Error("SHEETS_WEBHOOK_URL missing");
-
-  const res = await fetch(opts.url, {
-    method: "POST",
-    headers: { "content-type": "application/json" },
-    body: JSON.stringify({
-      secret: opts.secret || "",
-      email: opts.email,
-      source: opts.source,
-      ts: opts.ts,
-      ip: opts.ip,
-      ua: opts.ua,
-    }),
-  });
+  const tablePath = encodeURIComponent(opts.tableName);
+  const res = await fetch(
+    `https://api.airtable.com/v0/${opts.baseId}/${tablePath}`,
+    {
+      method: "POST",
+      headers: {
+        authorization: `Bearer ${opts.token}`,
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({
+        records: [
+          {
+            fields: {
+              [opts.emailField]: opts.email,
+            },
+          },
+        ],
+      }),
+    }
+  );
 
   if (!res.ok) {
     const text = await res.text().catch(() => "");
-    throw new Error(`Sheet ${res.status}: ${text.slice(0, 200)}`);
+    throw new Error(`Airtable ${res.status}: ${text.slice(0, 200)}`);
   }
 }
