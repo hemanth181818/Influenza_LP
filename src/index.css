@@ -88,12 +88,24 @@
   }
   main > section * {
     max-width: 100%;
+    min-width: 0;
   }
   /* Exceptions: things that intentionally need to escape (decorative blobs, marquee). */
   main > section [aria-hidden="true"],
-  main > section .animate-marquee,
-  main > section svg {
+  main > section .animate-marquee {
     max-width: none;
+  }
+  /* Long words / unbreakable strings (emails, URLs, long product names) must wrap on mobile. */
+  main > section p,
+  main > section h1,
+  main > section h2,
+  main > section h3,
+  main > section h4,
+  main > section li,
+  main > section a,
+  main > section span {
+    overflow-wrap: anywhere;
+    word-break: normal;
   }
 
   /* Tabular figures for data */
@@ -200,15 +212,26 @@
   .bracket-tag::before { content: "["; @apply text-acid mr-1; }
   .bracket-tag::after  { content: "]"; @apply text-acid ml-1; }
 
-  /* Chunky offset shadow — primary CTA */
+  /* Chunky offset shadow — primary CTA. Reduced on mobile to avoid visual overflow. */
   .shadow-stamp {
-    box-shadow: 4px 4px 0 0 hsl(var(--cream));
+    box-shadow: 2px 2px 0 0 hsl(var(--cream));
   }
   .shadow-stamp-sm {
-    box-shadow: 3px 3px 0 0 hsl(var(--cream));
+    box-shadow: 2px 2px 0 0 hsl(var(--cream));
   }
   .shadow-stamp-ink {
-    box-shadow: 4px 4px 0 0 hsl(var(--cream));
+    box-shadow: 2px 2px 0 0 hsl(var(--cream));
+  }
+  @media (min-width: 640px) {
+    .shadow-stamp {
+      box-shadow: 4px 4px 0 0 hsl(var(--cream));
+    }
+    .shadow-stamp-sm {
+      box-shadow: 3px 3px 0 0 hsl(var(--cream));
+    }
+    .shadow-stamp-ink {
+      box-shadow: 4px 4px 0 0 hsl(var(--cream));
+    }
   }
   /* Hover lift for stamped buttons */
   .stamp-lift {
