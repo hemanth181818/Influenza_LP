@@ -59,13 +59,13 @@ export default function ConnectionsSection() {
         <div className="grid grid-cols-12 gap-8 sm:gap-10 lg:gap-12 items-start">
           <div className="col-span-12 lg:col-span-7 reveal-on-scroll">
             <Card className="relative p-4 sm:p-10 bg-paper-soft border-2 border-cream rounded-none shadow-stamp overflow-hidden">
-              <div className="flex items-center justify-between mb-5">
-                <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-cream/65">
+              <div className="flex items-center justify-between gap-3 mb-5 pl-5 pr-4 sm:pl-0 sm:pr-0">
+                <span className="font-mono text-[9px] sm:text-[10px] uppercase tracking-[0.18em] sm:tracking-[0.22em] text-cream/65 truncate">
                   context-graph
                 </span>
-                <span className="inline-flex items-center gap-1.5">
+                <span className="inline-flex items-center gap-1.5 shrink-0">
                   <span className="h-2 w-2 rounded-full bg-acid" />
-                  <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-acid">
+                  <span className="font-mono text-[9px] sm:text-[10px] uppercase tracking-[0.18em] sm:tracking-[0.22em] text-acid">
                     live
                   </span>
                 </span>
@@ -83,7 +83,7 @@ export default function ConnectionsSection() {
 
           <div className="col-span-12 lg:col-span-5 reveal-on-scroll">
             <h3
-              className="font-display text-cream text-3xl sm:text-4xl leading-[1.05] tracking-[-0.02em]"
+              className="font-display text-cream text-[26px] sm:text-4xl leading-[1.05] tracking-[-0.02em] break-words"
               style={{ fontWeight: 600 }}
             >
               Connect once.{" "}
@@ -104,14 +104,14 @@ export default function ConnectionsSection() {
             <p className="mt-8 font-mono text-[10.5px] uppercase tracking-[0.24em] text-cream/60 mb-3">
               Native integrations
             </p>
-            <ul className="flex flex-wrap gap-2" aria-label="Connected sources">
+            <ul className="flex flex-wrap gap-1.5 sm:gap-2" aria-label="Connected sources">
               {SOURCES.map((s) => (
                 <li
                   key={s}
-                  className="inline-flex items-center gap-2 bg-paper-soft border-2 border-cream px-3 py-1.5 text-[11px] font-mono uppercase tracking-[0.16em] text-cream"
+                  className="inline-flex items-center gap-1.5 sm:gap-2 max-w-full bg-paper-soft border-2 border-cream px-2 sm:px-3 py-1 sm:py-1.5 text-[10px] sm:text-[11px] font-mono uppercase tracking-[0.12em] sm:tracking-[0.16em] text-cream"
                 >
-                  <span className="h-1.5 w-1.5 rounded-full bg-acid" />
-                  {s}
+                  <span className="h-1.5 w-1.5 rounded-full bg-acid shrink-0" />
+                  <span className="truncate">{s}</span>
                 </li>
               ))}
             </ul>

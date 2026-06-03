@@ -127,9 +127,9 @@ export default function TestimonialQuote() {
 
         {/* Final CTA — cleanly aligned */}
         <div className="mt-14 sm:mt-24 reveal-on-scroll">
-          <div className="bg-paper-soft border-2 border-cream shadow-stamp p-6 sm:p-12 lg:p-14">
+          <div className="bg-paper-soft border-2 border-cream shadow-stamp p-5 sm:p-12 lg:p-14 overflow-hidden">
             <div className="grid grid-cols-12 gap-6 lg:gap-8 items-start lg:items-end">
-              <div className="col-span-12 lg:col-span-7">
+              <div className="col-span-12 lg:col-span-7 min-w-0">
                 <p className="font-mono text-[11px] uppercase tracking-[0.24em] text-acid mb-5">
                   Start free
                 </p>
@@ -155,10 +155,10 @@ export default function TestimonialQuote() {
                 </p>
               </div>
 
-              <div className="col-span-12 lg:col-span-5 flex flex-col items-start lg:items-end gap-3">
+              <div className="col-span-12 lg:col-span-5 min-w-0 flex flex-col items-start lg:items-end gap-3">
                 <form
                   onSubmit={(e) => e.preventDefault()}
-                  className="w-full flex flex-col sm:flex-row sm:items-stretch border-2 border-cream bg-cream shadow-stamp"
+                  className="w-full max-w-full flex flex-col sm:flex-row sm:items-stretch border-2 border-cream bg-cream sm:shadow-stamp"
                 >
                   <label htmlFor="cta-email" className="sr-only">
                     Work email
@@ -169,11 +169,11 @@ export default function TestimonialQuote() {
                     required
                     autoComplete="email"
                     placeholder="you@brand.com"
-                    className="flex-1 min-w-0 bg-cream px-5 sm:px-6 py-5 sm:py-0 sm:h-[68px] text-[16px] text-ink placeholder:text-ink/45 focus:outline-none border-b-2 sm:border-b-0 border-cream/30"
+                    className="flex-1 min-w-0 w-full bg-cream px-4 sm:px-6 py-4 sm:py-0 sm:h-[68px] text-[16px] text-ink placeholder:text-ink/45 focus:outline-none border-b-2 sm:border-b-0 border-cream/30"
                   />
                   <button
                     type="submit"
-                    className="group/btn inline-flex justify-center items-center gap-2 bg-acid sm:border-l-2 border-cream px-5 sm:px-6 py-4 sm:py-0 sm:h-[68px] text-[13px] font-semibold uppercase tracking-[0.18em] text-cream hover:bg-acid/95 focus-visible:outline-none"
+                    className="group/btn w-full sm:w-auto inline-flex justify-center items-center gap-2 bg-acid border-t-2 sm:border-t-0 sm:border-l-2 border-cream px-5 sm:px-6 py-4 sm:py-0 sm:h-[68px] text-[13px] font-semibold uppercase tracking-[0.18em] text-cream hover:bg-acid/95 focus-visible:outline-none"
                   >
                     Start free
                     <ArrowUpRight className="w-4 h-4 transition-transform group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5" />
