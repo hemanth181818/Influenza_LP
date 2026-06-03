@@ -4,7 +4,7 @@ export default function TestimonialQuote() {
   return (
     <section
       id="signup"
-      className="relative py-16 sm:py-32 px-5 sm:px-6 overflow-hidden bg-ink grain"
+      className="relative py-16 sm:py-32 overflow-hidden bg-ink grain"
     >
       <div
         aria-hidden="true"
@@ -15,7 +15,7 @@ export default function TestimonialQuote() {
         className="absolute -bottom-56 sm:-bottom-72 left-1/2 -translate-x-1/2 w-[380px] h-[380px] sm:w-[760px] sm:h-[760px] rounded-full halftone opacity-25 mix-blend-multiply"
       />
 
-      <div className="container relative z-10 mx-auto">
+      <div className="relative z-10 w-full max-w-[1320px] mx-auto px-4 sm:px-8">
         {/* Section header */}
         <header className="max-w-3xl mb-10 sm:mb-14 reveal-on-scroll">
           <p className="font-mono text-[11px] uppercase tracking-[0.24em] text-acid mb-4">
@@ -127,17 +127,17 @@ export default function TestimonialQuote() {
 
         {/* Final CTA — cleanly aligned */}
         <div className="mt-14 sm:mt-24 reveal-on-scroll">
-          <div className="bg-paper-soft border-2 border-cream shadow-stamp p-5 sm:p-12 lg:p-14 overflow-hidden">
-            <div className="grid grid-cols-12 gap-6 lg:gap-8 items-start lg:items-end">
-              <div className="col-span-12 lg:col-span-7 min-w-0">
+          <div className="bg-paper-soft border-2 border-cream shadow-stamp p-4 sm:p-12 lg:p-14 overflow-hidden">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start lg:items-end">
+              <div className="lg:col-span-7 min-w-0">
                 <p className="font-mono text-[11px] uppercase tracking-[0.24em] text-acid mb-5">
                   Start free
                 </p>
                 <h3
-                  className="font-display text-cream tracking-[-0.03em]"
+                  className="font-display text-cream tracking-[-0.03em] break-words"
                   style={{
-                    fontSize: "clamp(1.85rem, 5vw, 4.4rem)",
-                    lineHeight: 1,
+                    fontSize: "clamp(1.6rem, 6vw, 4.4rem)",
+                    lineHeight: 1.05,
                     fontWeight: 600,
                   }}
                 >
@@ -155,10 +155,10 @@ export default function TestimonialQuote() {
                 </p>
               </div>
 
-              <div className="col-span-12 lg:col-span-5 min-w-0 flex flex-col items-start lg:items-end gap-3">
+              <div className="lg:col-span-5 min-w-0 w-full flex flex-col items-stretch lg:items-end gap-3">
                 <form
                   onSubmit={(e) => e.preventDefault()}
-                  className="w-full max-w-full flex flex-col sm:flex-row sm:items-stretch border-2 border-cream bg-cream sm:shadow-stamp"
+                  className="block w-full max-w-full overflow-hidden border-2 border-cream bg-cream sm:shadow-stamp sm:flex sm:flex-row sm:items-stretch"
                 >
                   <label htmlFor="cta-email" className="sr-only">
                     Work email
@@ -169,11 +169,11 @@ export default function TestimonialQuote() {
                     required
                     autoComplete="email"
                     placeholder="you@brand.com"
-                    className="flex-1 min-w-0 w-full bg-cream px-4 sm:px-6 py-4 sm:py-0 sm:h-[68px] text-[16px] text-ink placeholder:text-ink/45 focus:outline-none border-b-2 sm:border-b-0 border-cream/30"
+                    className="block w-full max-w-full min-w-0 flex-1 bg-cream px-4 sm:px-6 py-4 sm:py-0 sm:h-[68px] text-[16px] text-ink placeholder:text-ink/45 focus:outline-none border-b-2 sm:border-b-0 border-cream/30 box-border"
                   />
                   <button
                     type="submit"
-                    className="group/btn w-full sm:w-auto inline-flex justify-center items-center gap-2 bg-acid border-t-2 sm:border-t-0 sm:border-l-2 border-cream px-5 sm:px-6 py-4 sm:py-0 sm:h-[68px] text-[13px] font-semibold uppercase tracking-[0.18em] text-cream hover:bg-acid/95 focus-visible:outline-none"
+                    className="group/btn block w-full max-w-full sm:w-auto sm:flex-shrink-0 box-border bg-acid border-t-2 sm:border-t-0 sm:border-l-2 border-cream px-5 sm:px-6 py-4 sm:py-0 sm:h-[68px] text-[13px] font-semibold uppercase tracking-[0.18em] text-cream hover:bg-acid/95 focus-visible:outline-none inline-flex justify-center items-center gap-2"
                   >
                     Start free
                     <ArrowUpRight className="w-4 h-4 transition-transform group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5" />

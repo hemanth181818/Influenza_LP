@@ -68,16 +68,23 @@
     text-rendering: optimizeLegibility;
     /* Hard-stop any horizontal page scroll — sections may have decorative blobs
        that bleed; per-section overflow-hidden + this is the belt and braces. */
-    overflow-x: hidden;
+    overflow-x: clip;
+    max-width: 100%;
   }
 
   body {
     @apply bg-ink text-cream font-sans;
     font-feature-settings: "ss01", "ss02", "cv11", "cv02";
-    overflow-x: hidden;
+    overflow-x: clip;
     /* Prevent any rogue child from forcing the viewport wider. */
-    max-width: 100vw;
-    width: 100vw;
+    max-width: 100%;
+    width: 100%;
+    position: relative;
+  }
+
+  #root {
+    overflow-x: clip;
+    max-width: 100%;
   }
 
   /* Hard belt-and-braces: every direct section descendant respects viewport width.
