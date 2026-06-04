@@ -256,18 +256,6 @@ export default function TestimonialQuote() {
                     </span>
                   )}
                 </p>
-                <a
-                  href="mailto:hello@influenza.app"
-                  className="inline-flex items-baseline gap-2 px-1 py-2 text-cream/80 hover:text-cream transition-colors min-h-[44px]"
-                >
-                  <span
-                    className="text-lg italic"
-                    style={{ fontFamily: "'Instrument Serif', serif" }}
-                  >
-                    or, book a demo
-                  </span>
-                  <span className="font-mono text-acid">→</span>
-                </a>
               </div>
             </div>
           </div>
