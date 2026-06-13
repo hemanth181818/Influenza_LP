@@ -9,7 +9,16 @@
  *   AIRTABLE_BASE_ID       — Airtable base ID, starts with app...
  *   AIRTABLE_TABLE_NAME    — table name or table ID
  *   AIRTABLE_EMAIL_FIELD   — email field name, defaults to Email
+ *
+ *   BREVO_API_KEY          — Brevo v3 API key (xkeysib-...)
+ *   BREVO_SENDER_EMAIL     — verified Brevo sender address
+ *   BREVO_SENDER_NAME      — inbox display name, defaults to Influenza
+ *   BREVO_REPLY_TO         — optional reply-to address
+ *   BREVO_CC               — optional CC address on every welcome email
+ *   QUESTIONNAIRE_URL      — CTA link in the welcome email
  */
+
+import { sendWelcomeEmail } from "../lib/welcome-email.mjs";
 
 export const config = { runtime: "edge" };
 
@@ -63,6 +72,29 @@ export default async function handler(req: Request): Promise<Response> {
       { ok: false, error: "Something went wrong. Please try again." },
       502
     );
+  }
+
+  // Fire the welcome email. Never block lead capture on an email failure —
+  // the lead is already safely in Airtable at this point.
+  try {
+    const apiKey = process.env.BREVO_API_KEY;
+    const senderEmail = process.env.BREVO_SENDER_EMAIL;
+    if (apiKey && senderEmail) {
+      await sendWelcomeEmail({
+        apiKey,
+        senderEmail,
+        senderName: process.env.BREVO_SENDER_NAME || "Influenza",
+        to: email,
+        replyTo: process.env.BREVO_REPLY_TO,
+        cc: process.env.BREVO_CC,
+        questionnaireUrl: process.env.QUESTIONNAIRE_URL,
+        tags: ["influenza-signup", "issue-01-questionnaire", "auto-send"],
+      });
+    } else {
+      console.warn("signup: welcome email skipped — BREVO config missing");
+    }
+  } catch (err) {
+    console.error("signup: welcome email failed", err);
   }
 
   return json({ ok: true });

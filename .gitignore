@@ -14,6 +14,8 @@ dist-ssr
 .env
 .env.*
 !.env.example
+# Stray dotless env file that holds real secrets locally
+/env
 
 # Editor directories and files
 .vscode/*
