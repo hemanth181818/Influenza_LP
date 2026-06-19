@@ -34,3 +34,4 @@ dist-ssr
 .next
 vite.config.ts.timestamp-*
 
+.vercel
